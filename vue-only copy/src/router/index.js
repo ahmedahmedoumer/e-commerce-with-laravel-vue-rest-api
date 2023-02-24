@@ -9,7 +9,6 @@ import HomeComponent from '@/components/HomeComponent.vue'
 import ForgotPassword from '@/components/ForgotPassword.vue'
 import productView from '@/components/admin/productView.vue'
 import profileView from '@/components/admin/profileView.vue'
-import cartProduct from '@/components/admin/cartProduct'
 
 const routes = [{
         path: '/home',
@@ -58,11 +57,6 @@ const routes = [{
         path: '/product',
         name: 'product',
         component: productView,
-    },
-    {
-        path: '/cartProduct',
-        name: 'cartProduct',
-        component: cartProduct,
     },
     // {
     //     path: '/delete/:id',

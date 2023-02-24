@@ -1,27 +1,26 @@
 <template>
     <h1 v-if="!product">their is no product</h1>
+    <div class="row">
+    <div v-for="product in product" :key="product.id">
+        <div class="col-5 m-1">
+          <div class="card ">
+            <div class="card-header">
+              {{product.name}}
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">{{product.detail}}</h5>
+              <p class="card-text">
+                {{ product.created_at }}
+              </p>
+              <input type="number" min="1"  :name="product.name+product.id" :id="product.id" class="form-control" placeholder="enter quantity">
+              <a href="#" class="btn btn-primary" @click="carttobag([product.id,product.price])">cart to bag</a>
+            </div>
+          </div>
+        </div>
+      </div>
     
-    <table class="table table-hover">
-        <thead>
-          <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Name</th>
-            <th scope="col">Detail</th>
-            <th scope="col">created_at</th>
-            <th scope="col">updated_at</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="product in product" :key="product.id">
-                <td>{{ product.id }}</td>
-                <td>{{ product.name }}</td>
-                <td>{{ product.detail }}</td>
-                <td>{{ product.created_at }}</td>
-                <td>{{ product.updated_at }}</td>
-          </tr>
-        </tbody>
-    </table>
- 
+  </div>
+    
    
 </template>
 <script>
@@ -31,14 +30,21 @@ export default {
 name:'productView',
 data:function(){
      return{
-        data:{
-            id:'',
-            name:'',
-            detail:'',
-            created_at:'',
-            updated_at:'',
-        },
+        data:{},
      }
+},
+methods:{
+  carttobag(data){
+        var quantity=document.getElementById(data[0]).value;
+        quantity=parseInt(quantity);
+     
+        this.$store.commit('cart_store', {
+          id:data[0],
+          quantity:quantity,
+          price:data[1]
+        });
+
+  }
 },
 computed:{
     

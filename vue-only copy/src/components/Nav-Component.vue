@@ -10,12 +10,17 @@
             <router-link to="/product">
             <li class="nav-item btn btn-sm">products</li>
             </router-link>
-            <router-link to="/cartProduct">
-            <li class="nav-item btn btn-sm">
-                <b-icon-cart-fill />
-                <span class="badge rounded-pill badge-notification bg-danger"> {{ total_quantity }}</span>
+            <router-link to="">
+            <li class="nav-item btn btn-sm"><b-icon-cart-fill/>
+                 <div v-for="productQuantity in cartStore" :key="productQuantity.id">
+                  {{ productQuantity.quantities}}
+
+                  </div>
             </li>
+                
             </router-link>
+            
+          
             <router-link to="/profile">
                 <li class="nav-item btn btn-sm ">Profile</li>
             </router-link>
@@ -42,7 +47,6 @@
  
 </template>
 <script>
-// import { parse } from 'path';
 import { mapGetters } from 'vuex';
 // import axios from 'axios';
 export default {
@@ -50,7 +54,7 @@ name:'Nav-Component',
 data:function(){
     return{
              product:[],
-             allQuantity:0
+             totallId:0,
     }
 },
 
@@ -60,10 +64,10 @@ methods:{
         this.$store.dispatch('user',null);
         this.$router.push('/login');
     },
-    sumOfQuantityitem(quantity){
-        this.allQuantity +=quantity;
-                     
-    },
+    sumall(quantity){
+        this.totallId += quantity;
+        console.log( this.totallId);
+    }
 },
 // async created(){
           
@@ -71,7 +75,8 @@ methods:{
 // },
 computed:{
 
-...mapGetters(['user','cart_store','total_quantity']),
+...mapGetters(['user', 'cartStore']),
+
 
 }
 
