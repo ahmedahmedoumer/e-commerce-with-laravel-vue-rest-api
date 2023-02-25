@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Auth\Events\Failed;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use App\Models\verified_payment;
 class taskcontroller extends Controller
 {
     public function login(Request $request){
@@ -39,14 +40,8 @@ class taskcontroller extends Controller
    }
 
     public function getuser(){
-
-        // return "hello";
-      
-        //  $data= DB::table('users')->get();
-        //   return $data;
         $users="ahmedin";
         return response()->json($users);
-        
     }
     public function create(Request $request){
       
@@ -135,4 +130,33 @@ class taskcontroller extends Controller
 
                 ]);
 }
+  public function PayOut(Request $request){
+
+
+       $data=$request->all();
+       $user=$data[0];
+       $cart_store=$data[1];
+       $total_price=$data[2];
+        
+        $count=0;
+       foreach($cart_store as $cart_store){
+        $check=verified_payment::insert([
+            'userID'=>$user['id'],
+            'productId'=>$cart_store['id'],
+            'quantity'=>$cart_store['quantity'],
+            'total_price'=>$cart_store['quantity'] * $cart_store['price'],
+            'created_at'=>now(),
+            'updated_at'=>now(),
+        ]);
+        $count++;
+       }
+       
+       if($check < 2){
+            return response()->json([
+                    'status'=>200,
+            ]);
+       }   
+  }
+
+  
 }

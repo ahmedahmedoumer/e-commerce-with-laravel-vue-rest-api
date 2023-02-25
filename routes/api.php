@@ -34,3 +34,4 @@ Route::post('update/{id}',[taskcontroller::class ,'submit_update_user_data']);
 Route::post('/register',[taskcontroller::class,'registeruser']);
 Route::post('/login',[taskcontroller::class,'login']);
 Route::get('/getProduct',[taskcontroller::class,'getProduct'])->name('getProduct');
+Route::post('/PayOut',[taskcontroller::class,'payout'])->name('PayOut');

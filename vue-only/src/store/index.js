@@ -27,8 +27,7 @@ export default createStore({
         },
         total_price: (state) => {
             return state.total_price;
-        },
-
+        }
     },
     actions: {
         user(context, user) {
@@ -36,10 +35,23 @@ export default createStore({
         },
         product(context, product) {
             context.commit('product', product);
-        }
+        },
 
     },
     mutations: {
+        setnullcartstore(state, payload) {
+            let len = state.cart_store.length;
+            state.cart_store.splice(0, len);
+            payload = 0;
+            state.total_price = payload;
+            state.total_quantity = payload;
+            // for (let index = 0; index < state.cart_store.length; index++) {
+
+            //     state.cart_store[index].splice();
+            //     console.log(payload);
+
+            // }
+        },
         user(state, user) {
             state.user = user;
         },
@@ -81,10 +93,6 @@ export default createStore({
             }
             return state.cart_store;
 
-        },
-        Payout(state, payload) {
-            console.log(state, payload);
-            console.log("you are successfully sell out");
         }
 
 

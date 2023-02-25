@@ -65,10 +65,7 @@ methods:{
                      
     },
 },
-// async created(){
-          
 
-// },
 computed:{
 
 ...mapGetters(['user','cart_store','total_quantity']),
