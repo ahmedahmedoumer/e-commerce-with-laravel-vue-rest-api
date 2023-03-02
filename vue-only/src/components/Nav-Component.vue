@@ -1,5 +1,4 @@
 <template>
-     <!-- As a link -->
      <div>
      <nav class="navbar navbar-light bg-light " v-if="user">
         <router-link to="/home">
@@ -13,7 +12,7 @@
             <router-link to="/cartProduct">
             <li class="nav-item btn btn-sm">
                 <b-icon-cart-fill />
-                <span class="badge rounded-pill badge-notification bg-danger"> {{ total_quantity }}</span>
+                <span class="badge rounded-pill badge-notification bg-danger" > {{ total_quantity }}</span>
             </li>
             </router-link>
             <router-link to="/profile">
@@ -53,7 +52,6 @@ data:function(){
              allQuantity:0
     }
 },
-
 methods:{
     submitLogout(){
         localStorage.removeItem('token');
@@ -61,11 +59,9 @@ methods:{
         this.$router.push('/login');
     },
     sumOfQuantityitem(quantity){
-        this.allQuantity +=quantity;
-                     
+        this.allQuantity +=quantity;               
     },
 },
-
 computed:{
 
 ...mapGetters(['user','cart_store','total_quantity']),

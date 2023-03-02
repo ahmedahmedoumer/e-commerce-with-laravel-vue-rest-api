@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\adminloginRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Auth\Events\Failed;
+// use Illuminate\Auth\Events\Failed;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\verified_payment;
@@ -156,6 +157,23 @@ class taskcontroller extends Controller
                     'status'=>200,
             ]);
        }   
+  }
+
+  public function adminLogin(adminloginRequest $adminform){
+    $data=$adminform->all();
+   $roleUser=User::with(['role_user'])->whereEmail($data['email'])->first();  
+    if(!$roleUser || Hash::check($data['password'] , $roleUser->password )){
+        return response([
+            'message'=> ['this credentials do not match our credentials']
+            , 404]);       
+    }
+    $token=$roleUser->createToken('my-apps-tokken')->plainTextToken;
+    return response()->json([
+         'isAdmin'=>$roleUser->role_user->role_id,
+         'user'=>$roleUser,
+         'token'=>$token,
+    ]);
+
   }
 
   
