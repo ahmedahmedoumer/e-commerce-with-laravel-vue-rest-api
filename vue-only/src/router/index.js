@@ -11,7 +11,7 @@ import productView from '@/components/user/productView.vue'
 import profileView from '@/components/user/profileView.vue'
 import cartProduct from '@/components/user/cartProduct'
 import adminLogin from '@/components/admin/adminLogin.vue'
-
+ 
 const routes = [{
         path: '/home',
         name: 'home',
@@ -28,7 +28,7 @@ const routes = [{
         name: 'sign-up',
         component: signup
     },
-  {        path: '/login',
+  {     path: '/login',
         name: 'login',
         component: Login_page
 
@@ -48,6 +48,7 @@ const routes = [{
         name: 'cartProduct',
         component: cartProduct,
     },
+   
     {
         path: '/about',
         name: 'about',
@@ -64,10 +65,16 @@ const routes = [{
     //     component:HomeComponent
     // }
 ]
-
 const router = createRouter({
     history: createWebHistory(),
     routes
-})
+});
+router.beforeEach((to, from, next) => {
+    if (to.matched.length === 0) {
+        router.push('/home');
+    } else {
+      next();
+    }
+  })
 
 export default router

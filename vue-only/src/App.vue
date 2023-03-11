@@ -1,4 +1,5 @@
 <template>
+  {{ user }}
   <Nav_Component />
   <router-view></router-view>
 </template>
