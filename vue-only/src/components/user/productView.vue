@@ -2,18 +2,19 @@
     <h1 v-if="!product">their is no product</h1>
     <div class="row">
     <div v-for="product in product" :key="product.id">
-        <div class="col-5 m-1">
+        <div class="col-4 m-1">
           <div class="card ">
             <div class="card-header">
               {{product.name}}
             </div>
             <div class="card-body">
-              <h5 class="card-title">{{product.detail}}</h5>
+              <img src="img/icons/safari-pinned-tab.svg" alt="product_image">
+              <h5 class="card-title">{{"Unit Price : $"+product.unit_price}}</h5>
               <p class="card-text">
                 {{ product.created_at }}
               </p>
               <input type="number" min="1"  :name="product.name+product.id" :id="product.id" class="form-control" placeholder="enter quantity">
-              <a href="#" class="btn btn-primary" @click="carttobag([product.id,product.price])">cart to bag</a>
+              <a href="#" class="btn btn-primary" @click="carttobag([product.id,product.unit_price])">cart to bag</a>
             </div>
           </div>
         </div>
@@ -52,7 +53,7 @@ computed:{
 },
 
 async mounted(){
-    await axios.get('http://localhost:8001/api/getProduct')
+    await axios.get('/getProduct')
            .then(response=>{ this.data=response.data.product;
             this.$store.dispatch('product',this.data);
         });

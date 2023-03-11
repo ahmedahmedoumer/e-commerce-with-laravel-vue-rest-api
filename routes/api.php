@@ -18,9 +18,9 @@ use Illuminate\Support\Facades\Hash;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::middleware('auth:sanctum')->group( function () {
+//     return $request->user();
+// });
 Route::get('/gettask' , [taskcontroller::class ,'getuser']);
 Route::any('/create',[taskcontroller::class,'create'])->name('create');
 Route::get('get/{id}', [taskcontroller::class,'update_user']);
@@ -28,8 +28,13 @@ Route::get('view_data',[taskcontroller::class , 'view_data']);
 Route::get("/delete_data/{id}",[taskcontroller::class ,'delete']);
 Route::post('update/{id}',[taskcontroller::class ,'submit_update_user_data']);
 Route::post('/register',[taskcontroller::class,'registeruser']);
-Route::post('/login',[taskcontroller::class,'login']);
 Route::get('/getProduct',[taskcontroller::class,'getProduct'])->name('getProduct');
 Route::post('/PayOut',[taskcontroller::class,'payout'])->name('PayOut');
 
-Route::post('/adminLogin',[taskcontroller::class,'adminLogin'])->name('/adminLogin');
+});
+Route::post('/login',[taskcontroller::class,'login']);
+
+// [taskcontroller::class,'adminLogin']);
+// Route::post('/admin/login',function(){
+//      return "hello";
+// });

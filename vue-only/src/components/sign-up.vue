@@ -42,7 +42,7 @@ export default {
                 password:this.password,
                 confirm_password:this.confirm_password,
             }
-            await axios.post('http://localhost:8001/api/register',data);
+            await axios.post('/register',data);
             // .then(response=>{
             //     console.log("success"
             //     + response);

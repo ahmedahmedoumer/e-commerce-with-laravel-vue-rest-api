@@ -3,10 +3,11 @@ export default createStore({
     state: {
         user: null,
         ahmed: "ahmedin",
-        product: {},
+        product: [],
         cart_store: [],
         total_quantity: 0,
         total_price: 0,
+        isAdmin:'',
 
     },
     getters: {
@@ -27,6 +28,9 @@ export default createStore({
         },
         total_price: (state) => {
             return state.total_price;
+        },
+        isAdmin:(state)=>{
+            return state.isAdmin;
         }
     },
     actions: {
@@ -35,6 +39,9 @@ export default createStore({
         },
         product(context, product) {
             context.commit('product', product);
+        },
+        isAdmin(state,isAdmin){
+            state.isAdmin=isAdmin;
         },
 
     },
@@ -62,6 +69,8 @@ export default createStore({
             state.total_quantity = 0;
             state.total_price = 0;
             let count = 0;
+
+
             if (state.cart_store.length > 0) {
                 for (let i = 0; i < state.cart_store.length; i++) {
                     if (payload.id == state.cart_store[i].id) {
@@ -70,9 +79,12 @@ export default createStore({
                     }
                 }
             }
+
+
             if (count == 0 || state.cart_store.length == 0) {
                 state.cart_store.push(payload);
             }
+
             for (let i = 0; i < state.cart_store.length; i++) {
                 state.total_quantity = state.total_quantity + state.cart_store[i].quantity;
                 state.total_price = state.total_price + state.cart_store[i].price * state.cart_store[i].quantity;

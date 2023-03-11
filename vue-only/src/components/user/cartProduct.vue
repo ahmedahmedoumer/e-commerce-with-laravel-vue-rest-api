@@ -16,7 +16,7 @@
    
     {{"product id :"+ item.id }} <br>
     {{"Quantity  :"+ item.quantity }} <br>
-    {{ "per product =    "+  item.price }}
+    {{ "Unit Price =    $"+  item.price }}
   </div>
   <input type="button" class="btn btn-danger" value="remove from cart" @click="removeCart(item.id)" >
    </div>
@@ -49,7 +49,7 @@ export default {
             this.$store.commit('removeCart',{id});
         },
         async payout(){
-            await axios.post('http://localhost:8001/api/PayOut',[
+            await axios.post('/PayOut',[
             store.state.user,
             store.state.cart_store,
             store.state.total_price

@@ -1,22 +1,22 @@
 <template>
      <div>
-     <nav class="navbar navbar-light bg-light " v-if="user">
-        <router-link to="/home">
-        <a class="navbar-brand text-dark btn btn-sm" href="#">Home</a>
+     <nav class="navbar navbar-light bg-light text-dark "  v-if="user">
+        <router-link to="/home" active-class="bg-dark text-white">
+        <a class="navbar-brand btn btn-sm" href="#">Home</a>
          </router-link>
         <ul class="nav justify-content-end ">
             
-            <router-link to="/product">
-            <li class="nav-item btn btn-sm">products</li>
+            <router-link to="/product" active-class="bg-dark text-dark">
+            <li class="nav-item text-dark btn btn-sm">products</li>
             </router-link>
-            <router-link to="/cartProduct">
+            <router-link to="/cartProduct" active-class="bg-dark text-white">
             <li class="nav-item btn btn-sm">
                 <b-icon-cart-fill />
                 <span class="badge rounded-pill badge-notification bg-danger" > {{ total_quantity }}</span>
             </li>
             </router-link>
-            <router-link to="/profile">
-                <li class="nav-item btn btn-sm ">Profile</li>
+            <router-link to="/profile" active-class="bg-dark text-white">
+                <li class="nav-item btn btn-sm " >Profile</li>
             </router-link>
                 <li>
                 <a class="nav active-link btn-sm" href="javascript:void(0)" @click="submitLogout">Logout</a>

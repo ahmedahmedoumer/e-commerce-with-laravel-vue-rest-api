@@ -12,24 +12,24 @@ use App\Models\verified_payment;
 class taskcontroller extends Controller
 {
     public function login(Request $request){
-        $request->validate([
-            'email'=>'required|email',
-            'password'=>'required',
-        ]);
-        $check=User::where('email',$request->email)->first();
+        // $request->validate([
+        //     'email'=>'required|email',
+        //     'password'=>'required',
+        // ]);
+        $check=User::with(['role_user'])->whereEmail($request->email)->first();
         if(!$check || !Hash::check($request->password,$check->password)){
             return response([
-                'message'=> ['this credentials do not match our credentials']
-                , 404]
-            );
+                'message'=> 'this credentials do not match our credentials',
+                'status'=>404
+           ]);
         }
-
         $createToken=$check->createToken('my-apps-token')->plainTextToken;
         $response=[
+            'isAdmin'=>$check->role_user->role_id,
             'user'=>$check,
             'token'=>$createToken,
         ];
-        return response($response,201);
+        return response($response,200);
     }
 
    public function view_data(){

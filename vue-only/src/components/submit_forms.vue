@@ -47,7 +47,7 @@ methods:{
    
     async submit_form(){
        this.submmitted=true;
-       await axios.post('http://localhost:8000/api/create',this.user_form)
+       await axios.post('/create',this.user_form)
        .then(response=>{this.check=response})
        .catch(error=>{this.feedback=error.response.data.errors});
         if(this.check.status===200){

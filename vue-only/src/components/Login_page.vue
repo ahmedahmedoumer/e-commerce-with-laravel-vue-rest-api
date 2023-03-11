@@ -1,4 +1,8 @@
 <template>
+
+        <div v-if="data" class="alert alert-danger" role="alert">
+         {{data}}
+       </div>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 
     <div class="container border-top">
@@ -14,8 +18,8 @@
                     <input type="submit" class="btn btn-primary" value="Login">
                     <input type="text" name="create_account" id="create_account" class="btn btn-success" value="Create Account">
                     <p class="forgot-password text-right">
-                        <router-link to="/ForgotPassword"> forgot Password</router-link>
-                        {{ message}}
+                        <!-- <router-link to="/ForgotPassword"> forgot Password</router-link>
+                        {{ message}} -->
                     </p>
                 </div>
             </form>
@@ -25,7 +29,6 @@
     </div>
 </template>
 <script>
-// import { response } from 'express';
 import { mapGetters } from 'vuex';
 import axios from 'axios';
 export default {
@@ -41,21 +44,27 @@ export default {
     },
     methods:{
         async loginUser(){
-            await axios.post('http://localhost:8001/api/login',this.user_data)
+            await axios.post('/login',this.user_data)
             .then(response=>{
-                localStorage.setItem('token',response.data.token);
+                if (response.status==200) {
                   this.$store.dispatch('user',response.data.user);
-                     this.$router.push('/home');
+                   this.$store.dispatch('isAdmin',response.data.isAdmin);
+                   localStorage.setItem('token',response.data.token);
+                   this.$router.push('/home');
 
-                        })
-              .catch(error=>{console.log(error)});
-        }
+                }
+                else{
+                    console.log(response.data.message)
+                    this.data=response.data.message;   }
+                 })
+            .catch(error=>{console.log(error);})
+            }
+
          
     },
     computed:{
-                  ...mapGetters({
-                    'message':'dinz'
-                  })
+                  ...mapGetters([
+                    'user' ])
     },
 }
 </script>

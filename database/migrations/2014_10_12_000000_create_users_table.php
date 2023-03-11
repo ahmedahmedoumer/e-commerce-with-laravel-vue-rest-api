@@ -20,7 +20,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
-            $table->boolean('theme_dark');
+            $table->boolean('theme_dark')->default(0);
             $table->timestamps();
         });
     }
