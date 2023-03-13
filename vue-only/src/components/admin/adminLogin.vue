@@ -1,14 +1,12 @@
 <template>
-    <div>
+        <div>
             <input type="text" v-model="this.data.username" id="username">
             <input type="text" v-model="this.data.password" id="password">
             <input type="submit" value="login" @click="submitAdminLogin">
-        
-    </div>
+        </div>
 </template>
 <script>
 import axios from 'axios';
-
 export default{
     name:'adminLogin',
     data:function(){
@@ -24,7 +22,6 @@ export default{
             console.log(this.username+"  "+this.password);
             await axios.post('/admin/login',this.data);
         }
-    }
-
+    },
 }
 </script>

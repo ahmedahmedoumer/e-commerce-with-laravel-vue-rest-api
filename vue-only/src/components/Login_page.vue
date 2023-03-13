@@ -1,5 +1,8 @@
 <template>
-
+<div  v-if="user">
+     <HomeComponent/>
+</div>
+<div v-else>
         <div v-if="data" class="alert alert-danger" role="alert">
          {{data}}
        </div>
@@ -23,16 +26,18 @@
                     </p>
                 </div>
             </form>
-                
-    
-        
+        </div>
     </div>
 </template>
 <script>
-// import { mapGetters } from 'vuex';
+import { mapGetters } from 'vuex';
+import HomeComponent from './HomeComponent.vue';
 import axios from 'axios';
 export default {
     name:'Login-page',
+    components:{
+        HomeComponent,
+    },
     data:function(){
         return{
             data:'',
@@ -62,10 +67,10 @@ export default {
 
          
     },
-    // computed:{
-    //               ...mapGetters([
-    //                 'user' ])
-    // },
+    computed:{
+                  ...mapGetters([
+                    'user' ])
+    },
 }
 </script>
 <style>
