@@ -33,7 +33,7 @@ Route::post('update/{id}',[taskcontroller::class ,'submit_update_user_data']);
 Route::post('/register',[taskcontroller::class,'registeruser']);
 Route::get('/getProduct',[taskcontroller::class,'getProduct'])->name('getProduct');
 Route::post('/PayOut',[taskcontroller::class,'payout'])->name('PayOut');
-
+Route::post('/admin/login',[taskcontroller::class,'adminLogin']);
 // });
 Route::post('/login',[taskcontroller::class,'login']);
 

@@ -1,14 +1,8 @@
 <template>
-  <div v-if="isAdmin=='admin'">
-       {{ "hello this is admin nav bar" }}
+  <div v-if="isAdmin=='user'">
+        <Nav_Component />
   </div>
-  <div v-else>
-  
-     <Nav_Component />
-     <router-view></router-view>
-
-
-    </div>
+    <router-view></router-view>
 </template>
 
 <script>

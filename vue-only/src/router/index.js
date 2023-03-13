@@ -11,7 +11,8 @@ import productView from '@/components/user/productView.vue'
 import profileView from '@/components/user/profileView.vue'
 import cartProduct from '@/components/user/cartProduct'
 import adminLogin from '@/components/admin/adminLogin.vue'
-import store from '@/store'
+import adminHome from '@/components/admin/adminHome.vue'
+// import store from '@/store'
  
 const routes = [{
         path: '/home',
@@ -24,6 +25,7 @@ const routes = [{
         name: 'adminLogin',
         component: adminLogin
     },
+    {path:'/admin/home', name:'adminHome', component:adminHome },
     {
         path: '/sign_up',
         name: 'sign-up',
@@ -71,9 +73,9 @@ const router = createRouter({
     routes
 });
 router.beforeEach((to, from, next) => {
-     const user=store.state.user;
-    if (user == null) {
-        console.log("null   "+user);
+     const user=localStorage.getItem('Token');
+          if (!user) {
+        console.log(user);
         if(to.name!='login' && to.name!='adminLogin'){
             next({name:'login'});
         }
@@ -81,7 +83,7 @@ router.beforeEach((to, from, next) => {
             next();
         }
     }
-    else{
+    else{   
            if (to.matched.length===0  || to.name=='login' || to.name=='adminLogin') {
            next({name:'home'});
            }
