@@ -12,4 +12,7 @@ class role_user extends Model
     public function role_user():BelongsTo{
         return $this->belongsTo(User::class);
      }
+     public function role(){
+        return $this->belongsTo(role::class);
+     }
 }

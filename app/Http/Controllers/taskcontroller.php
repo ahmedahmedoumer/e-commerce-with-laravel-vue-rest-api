@@ -23,9 +23,10 @@ class taskcontroller extends Controller
                 'status'=>404
            ]);
         }
+
         $createToken=$check->createToken('my-apps-token')->plainTextToken;
         $response=[
-            'isAdmin'=>$check->role_user->role_id,
+            'isAdmin'=>$check->role_user->role->name,
             'user'=>$check,
             'token'=>$createToken,
         ];

@@ -18,9 +18,12 @@ use Illuminate\Support\Facades\Hash;
 |
 */
 
-Route::middleware('auth:sanctum')->group( function () {
-//     return $request->user();
-// });
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return response()->json([
+        'user'=>$request->user(),
+        'isAdmin'=>$request->user()->role_user->role->name
+    ]);
+});
 Route::get('/gettask' , [taskcontroller::class ,'getuser']);
 Route::any('/create',[taskcontroller::class,'create'])->name('create');
 Route::get('get/{id}', [taskcontroller::class,'update_user']);
@@ -31,7 +34,7 @@ Route::post('/register',[taskcontroller::class,'registeruser']);
 Route::get('/getProduct',[taskcontroller::class,'getProduct'])->name('getProduct');
 Route::post('/PayOut',[taskcontroller::class,'payout'])->name('PayOut');
 
-});
+// });
 Route::post('/login',[taskcontroller::class,'login']);
 
 // [taskcontroller::class,'adminLogin']);

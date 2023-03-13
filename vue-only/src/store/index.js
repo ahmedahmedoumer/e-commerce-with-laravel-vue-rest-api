@@ -7,7 +7,7 @@ export default createStore({
         cart_store: [],
         total_quantity: 0,
         total_price: 0,
-        isAdmin:'',
+        isAdmin:null,
 
     },
     getters: {
@@ -40,8 +40,8 @@ export default createStore({
         product(context, product) {
             context.commit('product', product);
         },
-        isAdmin(state,isAdmin){
-            state.isAdmin=isAdmin;
+        isAdmin(context, isAdmin){
+           context.commit('isAdmin', isAdmin);
         },
 
     },
@@ -58,6 +58,9 @@ export default createStore({
             //     console.log(payload);
 
             // }
+        },
+        isAdmin(state,isAdmin){
+          state.isAdmin=isAdmin;
         },
         user(state, user) {
             state.user = user;

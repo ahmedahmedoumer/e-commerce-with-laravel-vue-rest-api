@@ -29,7 +29,7 @@
     </div>
 </template>
 <script>
-import { mapGetters } from 'vuex';
+// import { mapGetters } from 'vuex';
 import axios from 'axios';
 export default {
     name:'Login-page',
@@ -51,7 +51,7 @@ export default {
                    this.$store.dispatch('isAdmin',response.data.isAdmin);
                    localStorage.setItem('token',response.data.token);
                    this.$router.push('/home');
-
+                 
                 }
                 else{
                     console.log(response.data.message)
@@ -62,10 +62,10 @@ export default {
 
          
     },
-    computed:{
-                  ...mapGetters([
-                    'user' ])
-    },
+    // computed:{
+    //               ...mapGetters([
+    //                 'user' ])
+    // },
 }
 </script>
 <style>
