@@ -1,7 +1,8 @@
 <template>
-  <div v-if="isAdmin=='user'">
+  <!-- <div v-if="isAdmin=='user' || isAdmin==null ">
         <Nav_Component />
-  </div>
+  </div> -->
+  <Nav_Component />
     <router-view></router-view>
 </template>
 

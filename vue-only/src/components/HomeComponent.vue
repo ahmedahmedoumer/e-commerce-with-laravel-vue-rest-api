@@ -12,17 +12,14 @@
 <script>
 import { mapGetters } from 'vuex';
 export default {
-    name:'HomeComponent',
-    computed:{
-
-...mapGetters([
-    'user',
-])
-
-},
- created(){
-    this.$router.push('/home');
- }   
-
+    name: "HomeComponent",
+    computed: {
+        ...mapGetters([
+            "user",
+        ])
+    },
+    created() {
+        this.$router.push("/home");
+    },
 }
 </script>

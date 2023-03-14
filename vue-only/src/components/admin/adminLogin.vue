@@ -52,8 +52,11 @@ export default{
                 localStorage.setItem('token',response.data.token);
                 this.$store.dispatch('user',response.data.user);
                 this.$store.dispatch('isAdmin',response.data.isAdmin);
-                this.$router.push('/admin/home');   })
-           .catch(error=>{console.log(error);});
+                this.$router.push('/admin/home');
+               })
+           .catch(error=>{console.log(error);
+            //   this.$router.push('/admin');
+        });
         }
     },
     computed:{

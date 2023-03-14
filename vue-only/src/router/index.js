@@ -1,23 +1,28 @@
 import { createRouter, createWebHistory } from 'vue-router'
-// import HomeView from '../views/HomeView.vue'
-// import submit_forms from '../components/submit_forms.vue'
-// import get_data from '../components/vuecomponents/get_data.vue'
-// import update_page from '../components/vuecomponents/update_page.vue'
 import Login_page from '@/components/Login_page.vue'
 import signup from '@/components/sign-up.vue'
 import HomeComponent from '@/components/HomeComponent.vue'
-// import ForgotPassword from '@/components/vuecomponents/ForgotPassword.vue'
 import productView from '@/components/user/productView.vue'
 import profileView from '@/components/user/profileView.vue'
 import cartProduct from '@/components/user/cartProduct'
 import adminLogin from '@/components/admin/adminLogin.vue'
 import adminHome from '@/components/admin/adminHome.vue'
-// import store from '@/store'
+import NavComponent from '@/components/Nav-Component.vue'
+import store from '@/store'
  
-const routes = [{
+const routes = [
+    {
+       path:'/',
+       name:'NavBar',
+       component:NavComponent
+    },
+    {
         path: '/home',
         name: 'home',
-        component: HomeComponent
+        component: HomeComponent,
+        meta:{
+            requiresAuth:true,
+        }
     },
    
      {
@@ -25,7 +30,15 @@ const routes = [{
         name: 'adminLogin',
         component: adminLogin
     },
-    {path:'/admin/home', name:'adminHome', component:adminHome },
+    {
+        path:'/admin/home', 
+        name:'adminHome',
+        component: adminHome ,
+        meta:{
+            requiresAuth:true,
+            // isAdmin:true,
+        }
+    },
     {
         path: '/sign_up',
         name: 'sign-up',
@@ -39,17 +52,26 @@ const routes = [{
     {
         path: '/profile',
         name: 'profile',
-        component: profileView
+        component: profileView, 
+        meta:{
+            requiresAuth:true,
+        }
     },
     {
         path: '/product',
         name: 'product',
         component: productView,
+        meta:{
+            requiresAuth:true,
+        }
     },
     {
         path: '/cartProduct',
         name: 'cartProduct',
         component: cartProduct,
+        meta:{
+            requiresAuth:true,
+        }
     },
    
     {
@@ -73,22 +95,43 @@ const router = createRouter({
     routes
 });
 router.beforeEach((to, from, next) => {
-     const user=localStorage.getItem('Token');
-          if (!user) {
-        console.log(user);
-        if(to.name!='login' && to.name!='adminLogin'){
-            next({name:'login'});
-        }
-        else{
-            next();
-        }
+    if (to.matched.some(record=>record.meta.requiresAuth)) {
+
+             if (!store.getters.user ) {
+                next({name:'login'});
+             }
+             else{
+                // if (to.matched.some(rolecheck=>rolecheck.meta.isAdmin)) {
+                // console.log('hello auth check');
+                //     if(!(store.getters.isAdmin==='admin')){
+                //           next({name:'home'});
+                //     }
+                //     else{
+                //         next();
+                //     }  
+                // }
+                    next();  
+             }
     }
-    else{   
-           if (to.matched.length===0  || to.name=='login' || to.name=='adminLogin') {
-           next({name:'home'});
-           }
-           next();
-       }
+    else{
+        next();
+    }
+//      const user=localStorage.getItem('Token');
+//           if (!user) {
+//         console.log(user);
+//         if(to.name!='login' && to.name!='adminLogin'){
+//             next({name:'login'});
+//         }
+//         else{
+//             next();
+//         }
+//     }
+//     else{   
+//            if (to.matched.length===0  || to.name=='login' || to.name=='adminLogin') {
+//            next({name:'home'});
+//            }
+//            next();
+//        }
   })
 
 export default router

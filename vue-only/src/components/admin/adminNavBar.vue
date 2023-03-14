@@ -1,36 +1,48 @@
 <template>
-    <div>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Brand Name</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">About</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Contact</a>
-      </li>
-    </ul>
-  </div>
-</nav>
 
-<div class="sidebar">
-  <ul>
-    <li><a href="#">Feature 1</a></li>
-    <li><a href="#">Feature 2</a></li>
-    <li><a href="#">Feature 3</a></li>
-  </ul>
-</div>
-        
-    </div>
+        <nav class="navbar navbar-light bg-light text-dark ml-auto " v-if="user && isAdmin=='admin'">
+        <router-link to="/home" active-class="bg-dark text-white">
+        <a class="navbar-brand btn btn-sm" href="#">Home</a>
+         </router-link>
+        <ul class="nav justify-content-end ">
+            <router-link to="/profile" active-class="bg-dark text-white">
+                <li class="nav-item btn btn-sm " >Profile</li>
+            </router-link>
+                <li>
+                <a class="nav active-link btn-sm" href="javascript:void(0)" @click="submitLogout">Logout</a>
+                </li>
+        </ul>
+      </nav> 
+    
 </template>
 <script>
+import { mapGetters } from 'vuex';
+// import axios from 'axios';
+export default {
+name:'adminNavBar',
+data:function(){
+    return{
+             product:[],
+             allQuantity:0
+    }
+},
+methods:{
+    submitLogout(){
+        localStorage.removeItem('token');
+        this.$store.dispatch('user',null);
+        this.$router.push('/login');
+    },
+    sumOfQuantityitem(quantity){
+        this.allQuantity +=quantity;               
+    },
+},
+computed:{
+
+...mapGetters(['user','isAdmin','cart_store','total_quantity']),
+
+}
+
+}
 </script>
 <style scoped>
 .sidebar {

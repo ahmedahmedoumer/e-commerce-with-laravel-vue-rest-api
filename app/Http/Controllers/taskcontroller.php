@@ -12,10 +12,10 @@ use App\Models\verified_payment;
 class taskcontroller extends Controller
 {
     public function login(Request $request){
-        // $request->validate([
-        //     'email'=>'required|email',
-        //     'password'=>'required',
-        // ]);
+        $request->validate([
+            'email'=>'required|email',
+            'password'=>'required',
+        ]);
         $check=User::with(['role_user'])->whereEmail($request->email)->first();
         if(!$check || !Hash::check($request->password,$check->password)){
             return response([
@@ -162,7 +162,7 @@ class taskcontroller extends Controller
   public function adminLogin(adminloginRequest $adminform){
     $data=$adminform->all();
    $roleUser=User::with(['role_user'])->whereEmail($data['email'])->first();  
-    if(!$roleUser || Hash::check($data['password'] , $roleUser->password )){
+    if(!$roleUser || ! Hash::check($data['password'] , $roleUser->password )){
         return response([
             'message'=> ['this credentials do not match our credentials']
             , 404]);       

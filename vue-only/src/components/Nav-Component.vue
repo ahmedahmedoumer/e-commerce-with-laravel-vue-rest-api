@@ -1,8 +1,8 @@
 <template>
-     <div>
-     <nav class="navbar navbar-light bg-light text-dark "  v-if="user">
+    <div>
+     <nav class="navbar navbar-light bg-light text-dark " v-if="user"  >
         <router-link to="/home" active-class="bg-dark text-white">
-        <a class="navbar-brand btn btn-sm" href="#">Home</a>
+        <button class="navbar-brand btn btn-sm" href="#">Home</button>
          </router-link>
         <ul class="nav justify-content-end ">
             
@@ -19,20 +19,20 @@
                 <li class="nav-item btn btn-sm " >Profile</li>
             </router-link>
                 <li>
-                <a class="nav active-link btn-sm" href="javascript:void(0)" @click="submitLogout">Logout</a>
+                <button class="nav active-link btn-sm" href="javascript:void(0)" @click="submitLogout">Logout</button>
                 </li>
         </ul>
       </nav> 
-      <nav class="navbar navbar-light bg-dark m-3 " v-if="!user">
-    <a class="navbar-brand text-white btn btn-sm" href="#">Home</a>
+      <nav class="navbar navbar-light m-3 bg-light " v-if="!user">
+    <a class="navbar-brand text-dark btn btn-sm" href="#">Home</a>
     <ul class="nav justify-content-end ">
         <router-link to="/login"><li class="nav-item">
-            <a class="nav active-link btn text-white">Login</a>
+            <button class="nav active-link btn text-Dark">Login</button>
         </li>
     </router-link>
     <router-link to="/sign_up">
         <li class="nav-item ml-3">
-            <a class="nav active-link btn text-white">Sign up</a>
+            <button class="nav active-link btn text-dark">Sign UP</button>
         </li>
     </router-link>
     </ul>
@@ -41,7 +41,6 @@
  
 </template>
 <script>
-// import { parse } from 'path';
 import { mapGetters } from 'vuex';
 // import axios from 'axios';
 export default {
@@ -64,7 +63,7 @@ methods:{
 },
 computed:{
 
-...mapGetters(['user','cart_store','total_quantity']),
+...mapGetters(['user','isAdmin','cart_store','total_quantity']),
 
 }
 
