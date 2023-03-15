@@ -1,6 +1,6 @@
 import { createApp } from 'vue'
 import 'bootstrap/dist/css/bootstrap.css'
-import { BootstrapIconsPlugin } from 'bootstrap-icons-vue';
+import { BootstrapIconsPlugin } from 'bootstrap-icons-vue'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import '@headlessui/vue'
 import './axios'

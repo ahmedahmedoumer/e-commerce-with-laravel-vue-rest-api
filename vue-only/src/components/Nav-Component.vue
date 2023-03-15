@@ -1,6 +1,6 @@
 <template>
     <div>
-     <nav class="navbar navbar-light bg-light text-dark " v-if="user"  >
+     <nav v-if="user" class="navbar navbar-light bg-light text-dark "   >
         <router-link to="/home" active-class="bg-dark text-white">
         <button class="navbar-brand btn btn-sm" href="#">Home</button>
          </router-link>
@@ -23,7 +23,7 @@
                 </li>
         </ul>
       </nav> 
-      <nav class="navbar navbar-light m-3 bg-light " v-if="!user">
+      <nav v-else class="navbar navbar-light m-3 bg-light " >
     <a class="navbar-brand text-dark btn btn-sm" href="#">Home</a>
     <ul class="nav justify-content-end ">
         <router-link to="/login"><li class="nav-item">

@@ -1,24 +1,26 @@
 <template>
+    <div class="margin">
     <h3>Sign up Page</h3>
     <div class="container row border-top justify-content-center col-6" >
 <form @submit.prevent="submitForm" method="post">
     <div class="form-group">
-        <input type="text" class="form-control" id="" v-model="fullName" placeholder="full name">
+        <input type="text" class="form-control" id="name" v-model="fullName" placeholder="full name">
     </div>
     <div class="form-group">
-        <input type="email" class="form-control" id="" v-model="email" placeholder="Email">
+        <input type="email" class="form-control" id="email" v-model="email" placeholder="Email">
     </div>
     <div class="form-group">
-        <input type="password" class="form-control" id="" v-model="password" placeholder="Password">
+        <input type="password" class="form-control" id="password" v-model="password" placeholder="Password">
     </div>
     <div class="form-group">
-        <input type="password" class="form-control" id="" v-model="confirm_password" placeholder="Confirm password">
+        <input type="password" class="form-control" id="confirm_password" v-model="confirm_password" placeholder="Confirm password">
     </div>
     <div class="form-group">
         <input type="submit" value="Sign up" class="form-control btn btn-success btn-block">
     </div>
     <router-link to="reset" class="btn-primary" style="text-align:center; margin-left: 40%;"> Reset ?</router-link>
 </form>
+</div>
 </div>
 </template>
 <script>
@@ -59,8 +61,13 @@ export default {
     }
 }
 </script>
-<style>
+<style scoped>
 form-control{
         width: 20px;
+        border: 2px,solid;
+    }
+.margin{
+        margin-left: 15%;
+        margin-top: 5%;
     }
 </style>
