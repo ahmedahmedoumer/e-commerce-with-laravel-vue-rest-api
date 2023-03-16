@@ -1,5 +1,5 @@
 <template>
-<div>
+<div v-if="!user">
         <div v-if="data" class="alert alert-danger" role="alert">
          {{data}}
        </div>

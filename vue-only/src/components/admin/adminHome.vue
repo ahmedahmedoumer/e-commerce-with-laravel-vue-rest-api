@@ -1,14 +1,27 @@
 <template>
   <div>
    <nav v-if="user && isAdmin=='admin'" class="navbar navbar-light bg-light text-dark "   >
-      <router-link to="/home" active-class="bg-dark text-white">
+      <router-link to="/admin/home" active-class="bg-dark text-white">
       <button class="navbar-brand btn btn-sm" href="#">Home</button>
        </router-link>
       <ul class="nav justify-content-end ">
           
-          <router-link to="/product" active-class="bg-dark text-dark">
+          <router-link to="/admin/show/users" active-class="bg-dark text-dark">
+          <li class="nav-item text-dark btn btn-sm">Users</li>
+          </router-link>
+          <router-link to="/admin/view/customers" active-class="bg-dark text-dark">
+          <li class="nav-item text-dark btn btn-sm">Customers</li>
+          </router-link>
+          <router-link to="/admin/show/orders" active-class="bg-dark text-dark">
+          <li class="nav-item text-dark btn btn-sm">Orders</li>
+          </router-link>
+          <router-link to="/admin/show-available/product" active-class="bg-dark text-dark">
           <li class="nav-item text-dark btn btn-sm">products</li>
           </router-link>
+          <router-link to="/admin/make-reports/report" active-class="bg-dark text-dark">
+          <li class="nav-item text-dark btn btn-sm">Reports</li>
+          </router-link>
+        
           <router-link to="/profile" active-class="bg-dark text-white">
               <li class="nav-item btn btn-sm " >Profile</li>
           </router-link>
@@ -22,7 +35,7 @@
 <script>
 import { mapGetters } from 'vuex';
 export default {
-name:'Nav-Component',
+name:'adminHome',
 data:function(){
   return{
            product:[],

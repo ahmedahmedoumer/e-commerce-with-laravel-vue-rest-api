@@ -6,10 +6,10 @@ import productView from '@/components/user/productView.vue'
 import profileView from '@/components/user/profileView.vue'
 import cartProduct from '@/components/user/cartProduct'
 import adminLogin from '@/components/admin/adminLogin.vue'
-import adminHome from '@/components/admin/adminHome.vue'
+import showUsers from '@/components/admin/showUsers.vue'
 import NavComponent from '@/components/Nav-Component.vue'
 import store from '@/store'
- 
+
 const routes = [
     {
        path:'/',
@@ -33,12 +33,54 @@ const routes = [
     {
         path:'/admin/home', 
         name:'adminHome',
-        component: adminHome ,
+        component: HomeComponent ,
         meta:{
             requiresAuth:true,
-            // isAdmin:true,
-        }
-    },
+            isAdmin:true,
+        }},
+        {
+            path:'/admin/show/users', 
+            name:'show-users',
+            component: showUsers ,
+            meta:{
+                requiresAuth:true,
+                isAdmin:true,
+            }},
+            {
+                path:'/admin/view/customers', 
+                name:'view-customer',
+                component: HomeComponent ,
+                meta:{
+                    requiresAuth:true,
+                    isAdmin:true,
+                }},
+             {
+                    path:'/admin/show-available/product', 
+                    name:'available-product',
+                    component: HomeComponent ,
+                    meta:{
+                        requiresAuth:true,
+                        isAdmin:true,
+             }},
+             {
+                    path:'/admin/make-reports/report', 
+                    name:'make-reports',
+                    component: HomeComponent ,
+                    meta:{
+                        requiresAuth:true,
+                        isAdmin:true,
+             }},
+
+             {
+                path: '/admin/show/orders',
+                name: 'adminHome',
+                component: HomeComponent,
+                meta:{
+                    requiresAuth:true,
+                    isAdmin:true,
+                }
+            },
+           
     {
         path: '/sign_up',
         name: 'sign-up',
@@ -96,20 +138,18 @@ const router = createRouter({
 });
 router.beforeEach((to, from, next) => {
     if (to.matched.some(record=>record.meta.requiresAuth)) {
-
              if (!store.getters.user ) {
                 next({name:'login'});
              }
              else{
-                // if (to.matched.some(rolecheck=>rolecheck.meta.isAdmin)) {
-                // console.log('hello auth check');
-                //     if(!(store.getters.isAdmin==='admin')){
-                //           next({name:'home'});
-                //     }
-                //     else{
-                //         next();
-                //     }  
-                // }
+                if (to.matched.some(rolecheck=>rolecheck.meta.isAdmin)) {
+                    if(!(store.getters.isAdmin==='admin')){
+                       return false;
+                    }
+                    else{
+                        next();
+                    }  
+                }
                     next();  
              }
     }

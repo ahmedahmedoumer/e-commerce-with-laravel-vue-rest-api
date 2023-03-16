@@ -1,5 +1,4 @@
 <template>
-    <div>
      <nav v-if="user" class="navbar navbar-light bg-light text-dark "   >
         <router-link to="/home" active-class="bg-dark text-white">
         <button class="navbar-brand btn btn-sm" href="#">Home</button>
@@ -37,7 +36,6 @@
     </router-link>
     </ul>
        </nav>
-    </div>
  
 </template>
 <script>

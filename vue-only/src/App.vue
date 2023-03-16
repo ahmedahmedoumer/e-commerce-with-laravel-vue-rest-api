@@ -1,19 +1,18 @@
 <template>
   <div v-if="isAdmin=='admin'">
-     <adminNavBar/>
+     <adminHome/>
   </div>
-  <div v-else>
+  <!-- <div v-if="isAdmin='user' || !user ">
        <Nav_Component />
-       <router-view></router-view>
-  </div>
+   </div> -->
+   <router-view></router-view>
 </template>
 
 <script>
 import axios from 'axios';
 import { mapGetters } from 'vuex';
-import Nav_Component from './components/Nav-Component.vue';
-import adminNavBar from './components/admin/adminNavBar.vue';
-import './main.js'
+// import Nav_Component from './components/Nav-Component.vue';
+import adminHome from './components/admin/adminHome.vue';
 export default {
   name:'App',
   data:function(){
@@ -22,8 +21,8 @@ export default {
        }
   },
   components:{
-   Nav_Component,
-   adminNavBar,
+  //  Nav_Component,
+   adminHome,
   },
   computed:{
     ...mapGetters(['isAdmin','user']),

@@ -34,6 +34,7 @@ Route::post('/register',[taskcontroller::class,'registeruser']);
 Route::get('/getProduct',[taskcontroller::class,'getProduct'])->name('getProduct');
 Route::post('/PayOut',[taskcontroller::class,'payout'])->name('PayOut');
 Route::post('/admin/login',[taskcontroller::class,'adminLogin']);
+Route::any('/fetch',[taskcontroller::class,'fetch']);
 // });
 Route::post('/login',[taskcontroller::class,'login']);
 

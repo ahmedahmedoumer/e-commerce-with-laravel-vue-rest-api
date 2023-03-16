@@ -175,6 +175,9 @@ class taskcontroller extends Controller
     ]);
 
   }
+  public function fetch(){
+    return response()->json(User::all());
+  }
 
   
 }

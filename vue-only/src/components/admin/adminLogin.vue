@@ -8,7 +8,7 @@
             <div class="col-lg-6">
                 <div class="card border-0 shadow">
                     <div class="card-body p-5">
-                        <h3 class="mb-4">Login</h3>
+                        <h3 class="mb-4">Admin Login</h3>
                         
                             <div class="mb-3">
                                 <label for="email">Email address</label>

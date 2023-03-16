@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { createStore } from 'vuex'
 import createPersistedState from "vuex-persistedstate";
 export default createStore({
@@ -10,9 +11,13 @@ export default createStore({
         total_quantity: 0,
         total_price: 0,
         isAdmin:null,
+        allUserData:[],
 
     },
     getters: {
+        allUserData:(state)=>{
+            return state.allUserData;
+        },
         user: (state) => {
             return state.user;
         },
@@ -36,6 +41,12 @@ export default createStore({
         }
     },
     actions: {
+        fetch(context){
+           return axios.get('/fetch')
+            .then(response => { const data=response.data;
+                context.commit('setAllUserData',data );
+            });
+        },
         user(context, user) {
             context.commit('user', user);
         },
@@ -110,6 +121,9 @@ export default createStore({
             }
             return state.cart_store;
 
+        },
+        setAllUserData(state,payload){
+            state.allUserData=payload;
         }
 
 
